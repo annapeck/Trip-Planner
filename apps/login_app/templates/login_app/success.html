@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+</head>
+<body>
+	{% csrf_token %}
+	<h1>Hello, {{user.first_name}}!</h1>
+	<a href="/">Log out</a>
+	<a href="/myaccount/{{user.id}}">Edit My Account</a>
+
+	<table class="table">
+  <thead>
+  	<h5>Your Trip Schedules</h5>
+    <tr>
+      <th scope="col">Destination</th>
+      <th scope="col">Travel Start Date</th>
+      <th scope="col">Travel End Date</th>
+      <th scope="col">Plan</th>
+    </tr>
+  </thead>
+  <tbody>
+
+ 
+
+
+  	{% if usertrips %}
+      {% for trip in usertrips %}
+    <tr>
+      <th scope="row"><a href="/views/{{trip.id}}">{{trip.destination}}</a></th>
+      <td>{{trip.start_date}}</td>
+      <td>{{trip.end_date}}</td>
+      <td>{{trip.description}}</td>
+      <td>
+      <a href="/cancel/{{trip.id}}">Cancel</a>
+      {% if trip.creator == user.id %}
+      <a href="/delete/{{trip.id}}">Delete</a>
+      {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+	<table class="table">
+  <thead>
+  	<h5>Other User's Travel Plans</h5>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Travel Start Date</th>
+      <th scope="col">Travel End Date</th>
+      <th scope="col">Do you want to Join?</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% if othertrips %}
+    {% for other in othertrips %}
+    <tr>
+      <td>{{other.creator}}</td>
+      <td><a href="/views/{{other.id}}">{{other.destination}}</a></td>
+      <td>{{other.start_date}}</td>
+      <td>{{other.end_date}}</td>
+      <td><a href="/join/{{other.id}}">Join</a></td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+<a href="/addtrip">Add Travel Plan</a>
+
+
+
+
+	
+</body>
+</html>

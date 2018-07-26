@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+</head>
+<body>
+	
+	<a href="/">Log out</a>
+	<a href="/myaccount/{{user.id}}">Edit My Account</a>
+   {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
+<form action = "/addtrip_db" method = "post">
+  {% csrf_token %}
+    
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Destination:</label>
+          <input type="text" class="form-control" name="destination" placeholder="Destination">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Description:</label>
+          <input type="text" class="form-control" name="description" placeholder="Description">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Start Date:</label>
+          <input type="date" class="form-control" name="travelstart" placeholder="Start Date">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">End Date:</label>
+          <input type="date" class="form-control" name="travelend" placeholder="End Date">
+        </div>
+        <button type = "submit" class="btn btn-primary">Add a Travel Plan</button>
+
+    </form>
+
+    <a href="/success">Home</a>
+
+
+
+
+	
+</body>
+</html>

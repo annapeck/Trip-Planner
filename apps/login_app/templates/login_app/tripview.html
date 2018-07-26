@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+</head>
+<body>
+	
+
+	<a href="/">Log out</a>
+	<a href="/myaccount/{{user.id}}">Edit My Account</a>
+  <a href="/display">Home</a>
+
+
+  <h3>{{destination}}</h3>
+  <p>Planned By: {{created_by}}</p>
+  <p>Description: {{description}}</p>
+  <p>Travel Date From: {{start_date|date:"M d, Y"}}</p>
+  <p>Travel Date To: {{end_date|date:"M d, Y"}}</p>
+  <h2>Other Travelers Who Have Joined:</h2>
+  <p>Joined By:</p>
+
+  {% if all_travelers %}
+  {% for traveler in all_travelers %}
+  <p>{{traveler.first_name}} {{traveler.last_name}}</p>
+  {% endfor %}
+  {% endif %}
+
+
+
+
+
+
+	
+</body>
+</html>
